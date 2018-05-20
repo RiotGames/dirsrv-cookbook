@@ -64,14 +64,6 @@ action :create do
 
   converge_by("Registering as a #{new_resource.role} replica of #{new_resource.suffix}") do
 
-    dirsrv_plugin "Legacy Replication Plugin" do
-      host   new_resource.host
-      port   new_resource.port
-      credentials new_resource.credentials
-      databag_name new_resource.databag_name
-      action :disable
-    end
-
     netscaperoot = Regexp.new('o=NetscapeRoot$', Regexp::IGNORECASE)
     if netscaperoot.match(new_resource.suffix)
       dirsrv_plugin "Pass Through Authentication" do
